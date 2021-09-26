@@ -11,15 +11,15 @@ var Game = cc.Class({
         // 管道纵向最大偏移值
         pipeMaxOffsetY: 150,
         // 上下管道间最小间隙
-        pipeMinGap: 80,
+        pipeMinGap: 100,
         // 上下管道间最大间隙
-        pipeMaxGap: 150,
+        pipeMaxGap: 200,
         // 管道生成时间间隔
         pipeSpawnInterval: 4.5,
         // 管道生成时，屏幕外横向偏移位置
         pipeSpawnOffsetX: 30,
         // 重新刷新时间
-        gameReflashTime: 5,
+        gameReflashTime: 1,
         // 形变动画播放间隔
         scoreScaleDuration: 0.2,
         // 游戏菜单节点
@@ -95,7 +95,7 @@ var Game = cc.Class({
         if ( this.isGameOver === true )
             return;
         this.bird.onJump();
-    },    
+    },
     
     onStartGame: function () {
         // 关闭菜单节点显示
@@ -113,7 +113,7 @@ var Game = cc.Class({
     spawnPipes: function() {
         // 从管道预制（上端），生成管道实例
         var pipeUp = cc.instantiate(this.pipePrefabs[Constant.PIPE_UP]);
-        // 定义为上端类型
+        // 定义为上端类型, 并调用Pipe绑定的init函数
         pipeUp.getComponent('Pipe').init(Constant.PIPE_UP);
         // 获取管道的高度（上端与上端的相同）
         var pipeHeight = pipeUp.getComponent('cc.Sprite').spriteFrame.getRect().height;
@@ -137,16 +137,13 @@ var Game = cc.Class({
     },
 
     gameUpdate: function() {
-        for ( var i = 0; i < this.pipes.length; i ++ ) {
-            // 获取当前管道对象节点
-            var curPipeNode = this.pipes[i];
+        for (pipe of this.pipes) {
             // 对管道进行移动操作
-            curPipeNode.x += Constant.GROUND_VX;
-            
+            pipe.x += Constant.GROUND_VX;
             // 获取小鸟的包围盒
             var birdBox = this.bird.node.getBoundingBox();
             // 获取当前管道的包围盒
-            var pipeBox = curPipeNode.getBoundingBox();
+            var pipeBox = pipe.getBoundingBox();
             // var birdRect = new cc.Rect(birdBox.x - birdBox.width / 2, birdBox.y - birdBox.height / 2,
             //     birdBox.width, birdBox.height);
             // var pipeRect = new cc.Rect(pipeBox.x - pipeBox.width / 2, pipeBox.y - pipeBox.height / 2,
@@ -158,18 +155,17 @@ var Game = cc.Class({
             }
             
             // 获取当前管道对象
-            var curPipe = curPipeNode.getComponent('Pipe');
+            var curPipe = pipe.getComponent('Pipe');
             // 判断小鸟是否顺利通过管道，是则加分
-            if ( curPipeNode.x < this.bird.node.x && curPipe.isPassed === false 
-                && curPipe.type === Constant.PIPE_UP) {
+            if ( pipe.x < this.bird.node.x && curPipe.isPassed === false && curPipe.type === Constant.PIPE_UP) {
                 curPipe.isPassed = true;
                 this.addScore();
             }
             
             // 超出屏幕范围的管道，从数组中移除，并从节点上删除
-            if ( curPipeNode.x < -(this.size.width/2 + Constant.PIPE_SPAWN_OFFSET_X)) {
+            if ( pipe.x < -(this.size.width/2 + Constant.PIPE_SPAWN_OFFSET_X)) {
                 this.pipes.splice(i, 1);
-                this.pipesNode.removeChild(curPipeNode, true);
+                this.pipesNode.removeChild(pipe, true);
             } 
         }
         

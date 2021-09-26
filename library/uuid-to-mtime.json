@@ -85,19 +85,14 @@
     "relativePath": "Scene"
   },
   "4050e2b1-2549-4158-b2fd-7e4e043d9c46": {
-    "asset": 1632448526187,
-    "meta": 1632448526188,
+    "asset": 1632477693805,
+    "meta": 1632477693810,
     "relativePath": "Scene/game.fire"
   },
   "e2f4ad8c-281b-4fc8-8c2d-c56bbe7dbd63": {
     "asset": 1470968154000,
     "meta": 1632448526188,
     "relativePath": "Scripts"
-  },
-  "4a8a883c-7c89-4b49-9e71-a1159ce18465": {
-    "asset": 1456757872000,
-    "meta": 1632448526227,
-    "relativePath": "Scripts/Background.js"
   },
   "cd69e812-d4dd-42c4-a277-2fd194ae60f2": {
     "asset": 1470968154000,
@@ -125,19 +120,14 @@
     "relativePath": "Prefabs"
   },
   "75826c97-37d9-4999-a651-26961e237b12": {
-    "asset": 1632448526183,
-    "meta": 1632448526183,
+    "asset": 1632477347794,
+    "meta": 1632477347800,
     "relativePath": "Prefabs/pipeUp.prefab"
   },
   "07848eb8-5e58-492f-8869-444a21c6598e": {
     "asset": 1632448526180,
     "meta": 1632448526181,
     "relativePath": "Prefabs/pipeDown.prefab"
-  },
-  "1f3312a1-c3c6-4f52-9152-828dd8f79b70": {
-    "asset": 1456764898000,
-    "meta": 1632448526265,
-    "relativePath": "Scripts/Constant.js"
   },
   "66102e76-f180-495c-997c-6159fd3e2307": {
     "asset": 1456764368000,
@@ -654,9 +644,19 @@
     "meta": 1632448526170,
     "relativePath": "migration/use_v2.0.x_cc.Toggle_event.js"
   },
+  "1f3312a1-c3c6-4f52-9152-828dd8f79b70": {
+    "asset": 1632464567237,
+    "meta": 1632464591950,
+    "relativePath": "Scripts/Constant.js"
+  },
+  "4a8a883c-7c89-4b49-9e71-a1159ce18465": {
+    "asset": 1632622283112,
+    "meta": 1632622284477,
+    "relativePath": "Scripts/Background.js"
+  },
   "6bb26e95-f1ab-4775-be7a-7e5eac7e6c2e": {
-    "asset": 1632450876928,
-    "meta": 1632450878273,
+    "asset": 1632622261115,
+    "meta": 1632622284597,
     "relativePath": "Scripts/Game.js"
   }
 }

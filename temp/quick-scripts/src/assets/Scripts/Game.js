@@ -4,6 +4,12 @@ cc._RF.push(module, '6bb266V8atHdb56fl6sfmwu', 'Game');
 
 "use strict";
 
+function _createForOfIteratorHelperLoose(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; return function () { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } it = o[Symbol.iterator](); return it.next.bind(it); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 var Bird = require('Bird');
 
 var Background = require('Background');
@@ -18,15 +24,15 @@ var Game = cc.Class({
     // 管道纵向最大偏移值
     pipeMaxOffsetY: 150,
     // 上下管道间最小间隙
-    pipeMinGap: 80,
+    pipeMinGap: 100,
     // 上下管道间最大间隙
-    pipeMaxGap: 150,
+    pipeMaxGap: 200,
     // 管道生成时间间隔
     pipeSpawnInterval: 4.5,
     // 管道生成时，屏幕外横向偏移位置
     pipeSpawnOffsetX: 30,
     // 重新刷新时间
-    gameReflashTime: 5,
+    gameReflashTime: 1,
     // 形变动画播放间隔
     scoreScaleDuration: 0.2,
     // 游戏菜单节点
@@ -113,7 +119,7 @@ var Game = cc.Class({
   },
   spawnPipes: function spawnPipes() {
     // 从管道预制（上端），生成管道实例
-    var pipeUp = cc.instantiate(this.pipePrefabs[Constant.PIPE_UP]); // 定义为上端类型
+    var pipeUp = cc.instantiate(this.pipePrefabs[Constant.PIPE_UP]); // 定义为上端类型, 并调用Pipe绑定的init函数
 
     pipeUp.getComponent('Pipe').init(Constant.PIPE_UP); // 获取管道的高度（上端与上端的相同）
 
@@ -137,15 +143,14 @@ var Game = cc.Class({
     this.pipes.push(pipeDown);
   },
   gameUpdate: function gameUpdate() {
-    for (var i = 0; i < this.pipes.length; i++) {
-      // 获取当前管道对象节点
-      var curPipeNode = this.pipes[i]; // 对管道进行移动操作
-
-      curPipeNode.x += Constant.GROUND_VX; // 获取小鸟的包围盒
+    for (var _iterator = _createForOfIteratorHelperLoose(this.pipes), _step; !(_step = _iterator()).done;) {
+      pipe = _step.value;
+      // 对管道进行移动操作
+      pipe.x += Constant.GROUND_VX; // 获取小鸟的包围盒
 
       var birdBox = this.bird.node.getBoundingBox(); // 获取当前管道的包围盒
 
-      var pipeBox = curPipeNode.getBoundingBox(); // var birdRect = new cc.Rect(birdBox.x - birdBox.width / 2, birdBox.y - birdBox.height / 2,
+      var pipeBox = pipe.getBoundingBox(); // var birdRect = new cc.Rect(birdBox.x - birdBox.width / 2, birdBox.y - birdBox.height / 2,
       //     birdBox.width, birdBox.height);
       // var pipeRect = new cc.Rect(pipeBox.x - pipeBox.width / 2, pipeBox.y - pipeBox.height / 2,
       //     pipeBox.width, pipeBox.height);
@@ -157,17 +162,17 @@ var Game = cc.Class({
       } // 获取当前管道对象
 
 
-      var curPipe = curPipeNode.getComponent('Pipe'); // 判断小鸟是否顺利通过管道，是则加分
+      var curPipe = pipe.getComponent('Pipe'); // 判断小鸟是否顺利通过管道，是则加分
 
-      if (curPipeNode.x < this.bird.node.x && curPipe.isPassed === false && curPipe.type === Constant.PIPE_UP) {
+      if (pipe.x < this.bird.node.x && curPipe.isPassed === false && curPipe.type === Constant.PIPE_UP) {
         curPipe.isPassed = true;
         this.addScore();
       } // 超出屏幕范围的管道，从数组中移除，并从节点上删除
 
 
-      if (curPipeNode.x < -(this.size.width / 2 + Constant.PIPE_SPAWN_OFFSET_X)) {
+      if (pipe.x < -(this.size.width / 2 + Constant.PIPE_SPAWN_OFFSET_X)) {
         this.pipes.splice(i, 1);
-        this.pipesNode.removeChild(curPipeNode, true);
+        this.pipesNode.removeChild(pipe, true);
       }
     } // 小鸟触地，则死亡
 

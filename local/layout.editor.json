@@ -40,32 +40,16 @@
           {
             "children": [
               {
+                "active": 0,
                 "children": [
-                  {
-                    "active": 0,
-                    "children": [
-                      "scene"
-                    ],
-                    "height": 569.5,
-                    "type": "panel",
-                    "width": 448
-                  },
-                  {
-                    "active": 0,
-                    "children": [
-                      "node-library"
-                    ],
-                    "height": 569.5,
-                    "type": "panel",
-                    "width": 264
-                  }
+                  "scene"
                 ],
                 "height": 569.5,
-                "type": "dock-h",
-                "width": 715
+                "type": "panel",
+                "width": 534
               },
               {
-                "active": 0,
+                "active": 2,
                 "children": [
                   "console",
                   "timeline",
@@ -73,12 +57,12 @@
                 ],
                 "height": 266,
                 "type": "panel",
-                "width": 715
+                "width": 534
               }
             ],
             "height": 838.5,
             "type": "dock-v",
-            "width": 715
+            "width": 534
           },
           {
             "active": 0,
@@ -88,7 +72,7 @@
             ],
             "height": 838.5,
             "type": "panel",
-            "width": 377
+            "width": 558
           }
         ],
         "type": "dock-h"
@@ -98,7 +82,6 @@
         "assets",
         "cloud-function",
         "scene",
-        "node-library",
         "console",
         "timeline",
         "game-window",

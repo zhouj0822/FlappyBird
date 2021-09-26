@@ -1,13 +1,12 @@
 [
   {
     "__type__": "cc.SceneAsset",
-    "_name": "game",
+    "_name": "",
     "_objFlags": 0,
     "_native": "",
     "scene": {
       "__id__": 1
-    },
-    "asyncLoadAssets": false
+    }
   },
   {
     "__type__": "cc.Scene",
@@ -1459,9 +1458,9 @@
       "__id__": 2
     },
     "_enabled": true,
-    "pipeMaxOffsetY": 150,
-    "pipeMinGap": 80,
-    "pipeMaxGap": 200,
+    "pipeMaxOffsetY": 200,
+    "pipeMinGap": 1,
+    "pipeMaxGap": 150,
     "pipeSpawnInterval": 4.5,
     "pipeSpawnOffsetX": 30,
     "gameReflashTime": 1,

@@ -23,15 +23,16 @@ var Background = cc.Class({
   // use this for initialization
   onLoad: function onLoad() {
     // 获取屏幕尺寸
-    this._size = cc.winSize; // 获取地板图片的宽度
+    this._size = cc.winSize; // 获取地板图片的宽度, getRect(): 获取 SpriteFrame 的纹理矩形区域
 
     this._width = this.groundImg.spriteFrame.getRect().width; // 启动“地板移动控制”计时器
 
     this.schedule(this.onGroundMove, Constant.GROUND_MOVE_INTERVAL);
   },
   onGroundMove: function onGroundMove() {
-    this.groundNode[0].x += Constant.GROUND_VX;
-    this.groundNode[1].x += Constant.GROUND_VX;
+    this.groundNode[0].x += Constant.GROUND_VX; // GROUND_VX：单位时间地板移动速度
+
+    this.groundNode[1].x += Constant.GROUND_VX; // 一块地板出画后移动到第二块地板后，交替进行，避免因为地板移动而出画
 
     if (this.groundNode[0].x + this._width / 2 < -this._size.width / 2) {
       this.groundNode[0].x = this.groundNode[1].x + this._width - 5;
